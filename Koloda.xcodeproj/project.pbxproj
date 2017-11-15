@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17A4DE241FBCD77D00D1D905 /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C517E4F81D9D01920002D88F /* pop.framework */; };
 		C517E4B61D9CF9470002D88F /* Koloda.h in Headers */ = {isa = PBXBuildFile; fileRef = C517E4AE1D9CF9010002D88F /* Koloda.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C517E4EF1D9D00520002D88F /* DraggableCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C517E4E51D9D00520002D88F /* DraggableCardView.swift */; };
 		C517E4F01D9D00520002D88F /* KolodaCardStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C517E4E61D9D00520002D88F /* KolodaCardStorage.swift */; };
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17A4DE241FBCD77D00D1D905 /* pop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
