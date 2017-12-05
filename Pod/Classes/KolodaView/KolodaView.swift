@@ -11,9 +11,9 @@ import pop
 
 //Default values
 private let defaultCountOfVisibleCards = 3
-private let defaultBackgroundCardsTopMargin: CGFloat = 4.0
-private let defaultBackgroundCardsScalePercent: CGFloat = 0.95
-private let defaultBackgroundCardsLeftMargin: CGFloat = 8.0
+private let defaultBackgroundCardsTopMargin: CGFloat = 0.0
+private let defaultBackgroundCardsScalePercent: CGFloat = 1.00
+private let defaultBackgroundCardsLeftMargin: CGFloat = 0.0
 private let defaultBackgroundCardFrameAnimationDuration: TimeInterval = 0.2
 private let defaultAppearanceAnimationDuration: TimeInterval = 0.8
 
@@ -63,9 +63,9 @@ public extension KolodaViewDelegate {
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {}
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {}
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {}
-    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool { return true }
-    func kolodaShouldMoveBackgroundCard(_ koloda: KolodaView) -> Bool { return true }
-    func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool { return true }
+    func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -> Bool { return false }
+    func kolodaShouldMoveBackgroundCard(_ koloda: KolodaView) -> Bool { return false }
+    func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -> Bool { return false }
     func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {}
     func kolodaDidResetCard(_ koloda: KolodaView) {}
     func kolodaSwipeThresholdRatioMargin(_ koloda: KolodaView) -> CGFloat? { return nil}
@@ -113,7 +113,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     internal var animating = false
     
     internal var shouldTransparentizeNextCard: Bool {
-        return delegate?.kolodaShouldTransparentizeNextCard(self) ?? true
+        return delegate?.kolodaShouldTransparentizeNextCard(self) ?? false
     }
     
     public var isRunOutOfCards: Bool {
@@ -245,8 +245,8 @@ open class KolodaView: UIView, DraggableCardDelegate {
           card.frame = cardParameters.frame
 
           //For fully visible next card, when moving top card
-          if shouldTransparentizeNextCard {
-            if index == 1 {
+          if index == 1 {
+            if shouldTransparentizeNextCard {
               card.alpha = alphaValueSemiTransparent + (alphaValueOpaque - alphaValueSemiTransparent) * fraction
             }
           }
@@ -276,7 +276,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     
     func card(_ card: DraggableCardView, wasDraggedWithFinishPercentage percentage: CGFloat, inDirection direction: SwipeResultDirection) {
         animating = true
-        
+          //Disabled moving back card with view
         if let shouldMove = delegate?.kolodaShouldMoveBackgroundCard(self), shouldMove {
             self.moveOtherCardsWithPercentage(percentage)
         }
